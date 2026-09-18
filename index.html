@@ -3,20 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Locks Received Tracker</title>
+<title>M0F0K3NG🐇ONLINE</title>
 <style>
   * { box-sizing: border-box; }
   body {
     font-family: system-ui, -apple-system, sans-serif;
     background: #0d1117;
     color: #e6edf3;
-    max-width: 900px;
+    max-width: 950px;
     margin: 0 auto;
     padding: 2rem 1rem;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
   }
-  h1 { color: #58a6ff; margin-bottom: 0.5rem; }
+
+  /* ===== FLOATING RABBITS ===== */
+  #rabbits {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .rabbit {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.15;
+    animation: float linear infinite;
+    user-select: none;
+  }
+  @keyframes float {
+    0%   { transform: translateY(0) rotate(0deg); }
+    50%  { transform: translateY(-40px) rotate(10deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+  }
+
+  /* ===== WELCOME SCREEN ===== */
+  #welcome {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  #welcome h1 {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    margin: 0;
+    background: linear-gradient(90deg, #58a6ff, #bc8cff, #3fb950);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  #welcome p {
+    color: #8b949e;
+    font-size: 1.1rem;
+    max-width: 500px;
+  }
+  .enter-btn {
+    background: #238636;
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 999px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.15s;
+  }
+  .enter-btn:hover {
+    background: #2ea043;
+    transform: scale(1.05);
+  }
+
+  /* ===== MAIN APP ===== */
+  #app { position: relative; z-index: 1; display: none; }
+
+  h1.app-title {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    margin: 0 0 0.25rem;
+    background: linear-gradient(90deg, #58a6ff, #bc8cff, #3fb950);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
   .subtitle { color: #8b949e; margin-bottom: 1.5rem; font-size: 0.9rem; }
 
+  /* ===== CATEGORY TABS ===== */
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .tab {
+    padding: 0.6rem 1.1rem;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 999px;
+    color: #8b949e;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.15s;
+  }
+  .tab:hover { border-color: #58a6ff; color: #e6edf3; }
+  .tab.active {
+    background: #1f6feb;
+    border-color: #1f6feb;
+    color: white;
+  }
+  .tab .count {
+    opacity: 0.7;
+    font-size: 0.8rem;
+    margin-left: 0.35rem;
+  }
+
+  /* ===== FORM ===== */
   .form-card {
     background: #161b22;
     border: 1px solid #30363d;
@@ -41,7 +148,7 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
-  input {
+  input, select {
     width: 100%;
     padding: 0.6rem;
     background: #0d1117;
@@ -51,13 +158,9 @@
     font-size: 0.95rem;
     font-family: inherit;
   }
-  input:focus { outline: none; border-color: #58a6ff; }
+  input:focus, select:focus { outline: none; border-color: #58a6ff; }
 
-  .actions {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
+  .actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
   button {
     padding: 0.6rem 1.1rem;
     border: none;
@@ -71,15 +174,15 @@
   .btn-primary:hover { background: #2ea043; }
   .btn-secondary { background: #21262d; color: #e6edf3; border: 1px solid #30363d; }
   .btn-secondary:hover { background: #30363d; }
-  .btn-danger { background: transparent; color: #f85149; border: 1px solid #f85149; padding: 0.3rem 0.7rem; font-size: 0.8rem; }
+  .btn-danger {
+    background: transparent; color: #f85149;
+    border: 1px solid #f85149;
+    padding: 0.3rem 0.7rem; font-size: 0.8rem;
+  }
   .btn-danger:hover { background: #f85149; color: white; }
 
-  .stats {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
-  }
+  /* ===== STATS ===== */
+  .stats { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
   .stat {
     background: #161b22;
     border: 1px solid #30363d;
@@ -88,9 +191,16 @@
     flex: 1;
     min-width: 120px;
   }
-  .stat-label { font-size: 0.7rem; color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px; }
-  .stat-value { font-size: 1.5rem; font-weight: 600; color: #58a6ff; margin-top: 0.25rem; }
+  .stat-label {
+    font-size: 0.7rem; color: #8b949e;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .stat-value {
+    font-size: 1.5rem; font-weight: 600;
+    color: #58a6ff; margin-top: 0.25rem;
+  }
 
+  /* ===== TABLE ===== */
   table {
     width: 100%;
     border-collapse: collapse;
@@ -116,122 +226,203 @@
   .qty { color: #3fb950; font-weight: 600; }
   .empty { text-align: center; color: #8b949e; padding: 2rem; }
   .timestamp { color: #8b949e; font-size: 0.8rem; }
+  .category-tag {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    background: #1f6feb33;
+    color: #58a6ff;
+    border: 1px solid #1f6feb55;
+  }
 </style>
 </head>
 <body>
 
-<h1>🔒 Locks Received Tracker</h1>
-<p class="subtitle">Log every update with title, quantity, reporter, and handler.</p>
+<!-- FLOATING RABBITS -->
+<div id="rabbits"></div>
 
-<!-- ===== FORM ===== -->
-<div class="form-card">
-  <div class="form-grid">
-    <div>
-      <label for="title">Title / Item</label>
-      <input id="title" type="text" placeholder="e.g. Locks received" />
-    </div>
-    <div>
-      <label for="qty">Quantity</label>
-      <input id="qty" type="number" min="0" placeholder="0" />
-    </div>
-    <div>
-      <label for="reporter">Reporter</label>
-      <input id="reporter" type="text" placeholder="Who reported" />
-    </div>
-    <div>
-      <label for="handler">Handler</label>
-      <input id="handler" type="text" placeholder="Who handled" />
-    </div>
-  </div>
-  <div class="actions">
-    <button class="btn-primary" onclick="addEntry()">➕ Add Update</button>
-    <button class="btn-secondary" onclick="exportData()">⬇ Export JSON</button>
-    <button class="btn-secondary" onclick="document.getElementById('importFile').click()">⬆ Import JSON</button>
-    <input id="importFile" type="file" accept=".json" style="display:none" onchange="importData(event)" />
-  </div>
+<!-- WELCOME SCREEN -->
+<div id="welcome">
+  <div style="font-size: 4rem;">🐇</div>
+  <h1>M0F0K3NG🐇ONLINE</h1>
+  <p>Track your Generator, Bowser, Locks, and Load cables — all in one place.</p>
+  <button class="enter-btn" onclick="enterApp()">Enter Tracker 🐇</button>
 </div>
 
-<!-- ===== STATS ===== -->
-<div class="stats">
-  <div class="stat">
-    <div class="stat-label">Total Entries</div>
-    <div class="stat-value" id="statEntries">0</div>
-  </div>
-  <div class="stat">
-    <div class="stat-label">Total Quantity</div>
-    <div class="stat-value" id="statQty">0</div>
-  </div>
-  <div class="stat">
-    <div class="stat-label">Last Update</div>
-    <div class="stat-value" id="statLast" style="font-size:0.95rem;">—</div>
-  </div>
-</div>
+<!-- MAIN APP -->
+<div id="app">
 
-<!-- ===== TABLE ===== -->
-<table id="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Qty</th>
-      <th>Reporter</th>
-      <th>Handler</th>
-      <th>Time</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="tbody"></tbody>
-</table>
+  <h1 class="app-title">M0F0K3NG🐇ONLINE</h1>
+  <p class="subtitle">Select a category, then log your update.</p>
+
+  <!-- CATEGORY TABS -->
+  <div class="tabs" id="tabs"></div>
+
+  <!-- FORM -->
+  <div class="form-card">
+    <div class="form-grid">
+      <div>
+        <label for="item">Item</label>
+        <select id="item"></select>
+      </div>
+      <div>
+        <label for="qty">Quantity</label>
+        <input id="qty" type="number" min="0" placeholder="0" />
+      </div>
+      <div>
+        <label for="reporter">Reporter</label>
+        <input id="reporter" type="text" placeholder="Who reported" />
+      </div>
+      <div>
+        <label for="handler">Handler</label>
+        <input id="handler" type="text" placeholder="Who handled" />
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn-primary" onclick="addEntry()">➕ Add Update</button>
+      <button class="btn-secondary" onclick="exportData()">⬇ Export JSON</button>
+      <button class="btn-secondary" onclick="document.getElementById('importFile').click()">⬆ Import JSON</button>
+      <input id="importFile" type="file" accept=".json" style="display:none" onchange="importData(event)" />
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-label">Entries (this category)</div>
+      <div class="stat-value" id="statEntries">0</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Total Quantity</div>
+      <div class="stat-value" id="statQty">0</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Last Update</div>
+      <div class="stat-value" id="statLast" style="font-size:0.95rem;">—</div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Qty</th>
+        <th>Reporter</th>
+        <th>Handler</th>
+        <th>Time</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+</div>
 
 <script>
-// ===== STORAGE KEY =====
-const STORAGE_KEY = 'locks_tracker_entries';
+// ===== CONFIG =====
+const STORAGE_KEY = 'mofokeng_tracker_entries';
+
+// Categories → each has a list of selectable items
+const CATEGORIES = {
+  'Generator':   ['Generator'],
+  'Bowser':      ['Bowser'],
+  'Locks':       ['Locks'],
+  'Load cables': ['Load cables']
+};
 
 // ===== STATE =====
 let entries = [];
+let activeCategory = 'Generator';
 
-// ===== LOAD / SAVE =====
+// ===== STORAGE =====
 function load() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     entries = raw ? JSON.parse(raw) : [];
-  } catch {
-    entries = [];
-  }
+  } catch { entries = []; }
 }
-
 function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
 }
 
+// ===== RABBITS =====
+function spawnRabbits() {
+  const container = document.getElementById('rabbits');
+  const count = 18;
+  for (let i = 0; i < count; i++) {
+    const r = document.createElement('div');
+    r.className = 'rabbit';
+    r.textContent = '🐇';
+    r.style.left = Math.random() * 100 + '%';
+    r.style.top = Math.random() * 100 + '%';
+    r.style.fontSize = (1.2 + Math.random() * 2.5) + 'rem';
+    r.style.animationDuration = (6 + Math.random() * 8) + 's';
+    r.style.animationDelay = (-Math.random() * 5) + 's';
+    container.appendChild(r);
+  }
+}
+
+// ===== NAVIGATION =====
+function enterApp() {
+  document.getElementById('welcome').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  renderTabs();
+  render();
+}
+
+// ===== TABS =====
+function renderTabs() {
+  const tabs = document.getElementById('tabs');
+  tabs.innerHTML = Object.keys(CATEGORIES).map(cat => {
+    const count = entries.filter(e => e.category === cat).length;
+    return `<button class="tab ${cat === activeCategory ? 'active' : ''}" onclick="selectCategory('${cat}')">
+      ${cat}<span class="count">(${count})</span>
+    </button>`;
+  }).join('');
+}
+
+function selectCategory(cat) {
+  activeCategory = cat;
+  renderTabs();
+  populateItems();
+  render();
+}
+
+function populateItems() {
+  const items = CATEGORIES[activeCategory] || [];
+  const sel = document.getElementById('item');
+  sel.innerHTML = items.map(i => `<option value="${i}">${i}</option>`).join('');
+}
+
 // ===== ADD =====
 function addEntry() {
-  const title = document.getElementById('title').value.trim();
+  const item = document.getElementById('item').value;
   const qty = parseInt(document.getElementById('qty').value, 10);
   const reporter = document.getElementById('reporter').value.trim();
   const handler = document.getElementById('handler').value.trim();
 
-  if (!title) return alert('Please enter a title.');
+  if (!item) return alert('Please select an item.');
   if (!qty || qty < 0) return alert('Please enter a valid quantity.');
   if (!reporter) return alert('Please enter a reporter.');
   if (!handler) return alert('Please enter a handler.');
 
   entries.unshift({
     id: Date.now(),
-    title,
-    qty,
-    reporter,
-    handler,
+    category: activeCategory,
+    item, qty, reporter, handler,
     time: new Date().toISOString()
   });
 
   save();
+  renderTabs();
   render();
   clearForm();
-  document.getElementById('title').focus();
 }
 
 function clearForm() {
-  ['title', 'qty', 'reporter', 'handler'].forEach(id => {
+  ['qty', 'reporter', 'handler'].forEach(id => {
     document.getElementById(id).value = '';
   });
 }
@@ -241,20 +432,21 @@ function deleteEntry(id) {
   if (!confirm('Delete this entry?')) return;
   entries = entries.filter(e => e.id !== id);
   save();
+  renderTabs();
   render();
 }
 
 // ===== RENDER =====
 function render() {
+  const filtered = entries.filter(e => e.category === activeCategory);
   const tbody = document.getElementById('tbody');
-  const table = document.getElementById('table');
 
-  if (entries.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="6" class="empty">No entries yet. Add your first update above.</td></tr>`;
+  if (filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="6" class="empty">No entries in <strong>${activeCategory}</strong> yet. Add your first update above.</td></tr>`;
   } else {
-    tbody.innerHTML = entries.map(e => `
+    tbody.innerHTML = filtered.map(e => `
       <tr>
-        <td>${escapeHtml(e.title)}</td>
+        <td>${escapeHtml(e.item)}</td>
         <td class="qty">${e.qty}</td>
         <td>${escapeHtml(e.reporter)}</td>
         <td>${escapeHtml(e.handler)}</td>
@@ -264,11 +456,10 @@ function render() {
     `).join('');
   }
 
-  // Stats
-  document.getElementById('statEntries').textContent = entries.length;
-  document.getElementById('statQty').textContent = entries.reduce((s, e) => s + e.qty, 0);
-  document.getElementById('statLast').textContent = entries.length
-    ? new Date(entries[0].time).toLocaleString()
+  document.getElementById('statEntries').textContent = filtered.length;
+  document.getElementById('statQty').textContent = filtered.reduce((s, e) => s + e.qty, 0);
+  document.getElementById('statLast').textContent = filtered.length
+    ? new Date(filtered[0].time).toLocaleString()
     : '—';
 }
 
@@ -278,7 +469,7 @@ function exportData() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `locks-tracker-${new Date().toISOString().slice(0,10)}.json`;
+  a.download = `mofokeng-tracker-${new Date().toISOString().slice(0,10)}.json`;
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -294,6 +485,7 @@ function importData(event) {
       if (!confirm(`Import ${data.length} entries? This will replace current data.`)) return;
       entries = data;
       save();
+      renderTabs();
       render();
     } catch (err) {
       alert('Invalid JSON file: ' + err.message);
@@ -311,9 +503,9 @@ function escapeHtml(str) {
 }
 
 // ===== INIT =====
+spawnRabbits();
 load();
-render();
-document.getElementById('title').focus();
+populateItems();
 </script>
 
 </body>
