@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Data Bot</title>
+<style>
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  h1 { color: #58a6ff; }
+  .status {
+    font-size: 0.9rem;
+    color: #8b949e;
+    margin-bottom: 1rem;
+  }
+  .card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .card h3 { margin: 0 0 0.5rem; color: #58a6ff; }
+  .card p { margin: 0.25rem 0; color: #c9d1d9; }
+  .error { color: #f85149; }
+  button {
+    background: #238636;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  button:hover { background: #2ea043; }
+</style>
+</head>
+<body>
+
+<h1>🤖 Live Data Bot</h1>
+<div class="status" id="status">Loading...</div>
+<button onclick="loadData()">Refresh Now</button>
+<div id="output" style="margin-top: 1rem;"></div>
+
+<script>
+// ===== CONFIG =====
+const REFRESH_INTERVAL = 60000; // 60 seconds
+// Public API — swap this for whatever source you want
+const API_URL = 'https://api.github.com/repos/microsoft/vscode';
+
+// ===== STATE =====
+let timer = null;
+
+// ===== HELPERS =====
+function setStatus(msg, isError = false) {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = 'status' + (isError ? ' error' : '');
+}
+
+function render(data) {
+  const output = document.getElementById('output');
+  output.innerHTML = `
+    <div class="card">
+      <h3>${data.full_name}</h3>
+      <p>${data.description || 'No description'}</p>
+      <p>⭐ Stars: ${data.stargazers_count.toLocaleString()}</p>
+      <p>🍴 Forks: ${data.forks_count.toLocaleString()}</p>
+      <p>👀 Watchers: ${data.watchers_count.toLocaleString()}</p>
+      <p>🐛 Open issues: ${data.open_issues_count.toLocaleString()}</p>
+      <p>🔤 Language: ${data.language || 'N/A'}</p>
+      <p>🕒 Last updated: ${new Date(data.updated_at).toLocaleString()}</p>
+    </div>
+  `;
+}
+
+// ===== MAIN =====
+async function loadData() {
+  setStatus('Fetching...');
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    render(data);
+    setStatus(`Last updated: ${new Date().toLocaleTimeString()}`);
+  } catch (err) {
+    setStatus(`Error: ${err.message}`, true);
+    console.error(err);
+  }
+}
+
+function startAutoRefresh() {
+  if (timer) clearInterval(timer);
+  timer = setInterval(loadData, REFRESH_INTERVAL);
+}
+
+// ===== INIT =====
+loadData();
+startAutoRefresh();
+</script>
+
+</body>
+</html>
