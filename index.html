@@ -39,17 +39,12 @@
     100% { transform: translateY(0) rotate(0deg); }
   }
 
-  /* ===== WELCOME SCREEN ===== */
+  /* ===== WELCOME ===== */
   #welcome {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 80vh;
-    text-align: center;
-    gap: 1.5rem;
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    min-height: 80vh; text-align: center; gap: 1.5rem;
   }
   #welcome h1 {
     font-size: clamp(2rem, 6vw, 3.5rem);
@@ -59,30 +54,17 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  #welcome p {
-    color: #8b949e;
-    font-size: 1.1rem;
-    max-width: 500px;
-  }
+  #welcome p { color: #8b949e; font-size: 1.1rem; max-width: 500px; }
   .enter-btn {
-    background: #238636;
-    color: white;
-    border: none;
-    padding: 1rem 2.5rem;
-    border-radius: 999px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
+    background: #238636; color: white; border: none;
+    padding: 1rem 2.5rem; border-radius: 999px;
+    font-size: 1.1rem; font-weight: 600; cursor: pointer;
     transition: transform 0.15s, background 0.15s;
   }
-  .enter-btn:hover {
-    background: #2ea043;
-    transform: scale(1.05);
-  }
+  .enter-btn:hover { background: #2ea043; transform: scale(1.05); }
 
-  /* ===== MAIN APP ===== */
+  /* ===== APP ===== */
   #app { position: relative; z-index: 1; display: none; }
-
   h1.app-title {
     font-size: clamp(1.5rem, 4vw, 2.2rem);
     margin: 0 0 0.25rem;
@@ -93,81 +75,49 @@
   }
   .subtitle { color: #8b949e; margin-bottom: 1.5rem; font-size: 0.9rem; }
 
-  /* ===== CATEGORY TABS ===== */
-  .tabs {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-  }
+  /* ===== TABS ===== */
+  .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
   .tab {
     padding: 0.6rem 1.1rem;
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 999px;
-    color: #8b949e;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
+    background: #161b22; border: 1px solid #30363d;
+    border-radius: 999px; color: #8b949e;
+    cursor: pointer; font-size: 0.9rem; font-weight: 500;
     transition: all 0.15s;
   }
   .tab:hover { border-color: #58a6ff; color: #e6edf3; }
-  .tab.active {
-    background: #1f6feb;
-    border-color: #1f6feb;
-    color: white;
-  }
-  .tab .count {
-    opacity: 0.7;
-    font-size: 0.8rem;
-    margin-left: 0.35rem;
-  }
+  .tab.active { background: #1f6feb; border-color: #1f6feb; color: white; }
+  .tab .count { opacity: 0.7; font-size: 0.8rem; margin-left: 0.35rem; }
 
   /* ===== FORM ===== */
   .form-card {
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 8px;
-    padding: 1.25rem;
-    margin-bottom: 1.5rem;
+    background: #161b22; border: 1px solid #30363d;
+    border-radius: 8px; padding: 1.25rem; margin-bottom: 1.5rem;
   }
   .form-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-  }
-  @media (max-width: 700px) {
-    .form-grid { grid-template-columns: 1fr 1fr; }
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.75rem; margin-bottom: 0.75rem;
   }
   label {
-    display: block;
-    font-size: 0.75rem;
-    color: #8b949e;
+    display: block; font-size: 0.75rem; color: #8b949e;
     margin-bottom: 0.25rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    text-transform: uppercase; letter-spacing: 0.5px;
   }
-  input, select {
-    width: 100%;
-    padding: 0.6rem;
-    background: #0d1117;
-    border: 1px solid #30363d;
-    border-radius: 6px;
-    color: #e6edf3;
-    font-size: 0.95rem;
-    font-family: inherit;
+  input, select, textarea {
+    width: 100%; padding: 0.6rem;
+    background: #0d1117; border: 1px solid #30363d;
+    border-radius: 6px; color: #e6edf3;
+    font-size: 0.95rem; font-family: inherit;
   }
-  input:focus, select:focus { outline: none; border-color: #58a6ff; }
+  textarea { resize: vertical; min-height: 60px; }
+  input:focus, select:focus, textarea:focus {
+    outline: none; border-color: #58a6ff;
+  }
 
   .actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
   button {
-    padding: 0.6rem 1.1rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
+    padding: 0.6rem 1.1rem; border: none; border-radius: 6px;
+    cursor: pointer; font-size: 0.9rem; font-weight: 500;
     font-family: inherit;
   }
   .btn-primary { background: #238636; color: white; }
@@ -181,15 +131,22 @@
   }
   .btn-danger:hover { background: #f85149; color: white; }
 
+  /* ===== STATUS PILLS ===== */
+  .pill {
+    display: inline-block; padding: 0.15rem 0.6rem;
+    border-radius: 999px; font-size: 0.75rem; font-weight: 600;
+  }
+  .pill-operational { background: #23863633; color: #3fb950; border: 1px solid #3fb95055; }
+  .pill-faulty      { background: #f8514933; color: #f85149; border: 1px solid #f8514955; }
+  .pill-mobile      { background: #58a6ff33; color: #58a6ff; border: 1px solid #58a6ff55; }
+  .pill-static      { background: #bc8cff33; color: #bc8cff; border: 1px solid #bc8cff55; }
+
   /* ===== STATS ===== */
   .stats { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
   .stat {
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    flex: 1;
-    min-width: 120px;
+    background: #161b22; border: 1px solid #30363d;
+    border-radius: 8px; padding: 0.75rem 1rem;
+    flex: 1; min-width: 120px;
   }
   .stat-label {
     font-size: 0.7rem; color: #8b949e;
@@ -202,47 +159,31 @@
 
   /* ===== TABLE ===== */
   table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 8px;
-    overflow: hidden;
+    width: 100%; border-collapse: collapse;
+    background: #161b22; border: 1px solid #30363d;
+    border-radius: 8px; overflow: hidden;
   }
   th, td {
-    padding: 0.75rem;
-    text-align: left;
-    border-bottom: 1px solid #30363d;
-    font-size: 0.9rem;
+    padding: 0.75rem; text-align: left;
+    border-bottom: 1px solid #30363d; font-size: 0.9rem;
+    vertical-align: top;
   }
   th {
-    background: #1c2128;
-    color: #8b949e;
-    font-size: 0.75rem;
-    text-transform: uppercase;
+    background: #1c2128; color: #8b949e;
+    font-size: 0.75rem; text-transform: uppercase;
     letter-spacing: 0.5px;
   }
   tr:last-child td { border-bottom: none; }
   .qty { color: #3fb950; font-weight: 600; }
   .empty { text-align: center; color: #8b949e; padding: 2rem; }
-  .timestamp { color: #8b949e; font-size: 0.8rem; }
-  .category-tag {
-    display: inline-block;
-    padding: 0.15rem 0.5rem;
-    border-radius: 999px;
-    font-size: 0.7rem;
-    background: #1f6feb33;
-    color: #58a6ff;
-    border: 1px solid #1f6feb55;
-  }
+  .timestamp { color: #8b949e; font-size: 0.8rem; white-space: nowrap; }
 </style>
 </head>
 <body>
 
-<!-- FLOATING RABBITS -->
 <div id="rabbits"></div>
 
-<!-- WELCOME SCREEN -->
+<!-- ===== WELCOME ===== -->
 <div id="welcome">
   <div style="font-size: 4rem;">🐇</div>
   <h1>M0F0K3NG🐇ONLINE</h1>
@@ -250,35 +191,16 @@
   <button class="enter-btn" onclick="enterApp()">Enter Tracker 🐇</button>
 </div>
 
-<!-- MAIN APP -->
+<!-- ===== APP ===== -->
 <div id="app">
 
   <h1 class="app-title">M0F0K3NG🐇ONLINE</h1>
   <p class="subtitle">Select a category, then log your update.</p>
 
-  <!-- CATEGORY TABS -->
   <div class="tabs" id="tabs"></div>
 
-  <!-- FORM -->
   <div class="form-card">
-    <div class="form-grid">
-      <div>
-        <label for="item">Item</label>
-        <select id="item"></select>
-      </div>
-      <div>
-        <label for="qty">Quantity</label>
-        <input id="qty" type="number" min="0" placeholder="0" />
-      </div>
-      <div>
-        <label for="reporter">Reporter</label>
-        <input id="reporter" type="text" placeholder="Who reported" />
-      </div>
-      <div>
-        <label for="handler">Handler</label>
-        <input id="handler" type="text" placeholder="Who handled" />
-      </div>
-    </div>
+    <div class="form-grid" id="formGrid"></div>
     <div class="actions">
       <button class="btn-primary" onclick="addEntry()">➕ Add Update</button>
       <button class="btn-secondary" onclick="exportData()">⬇ Export JSON</button>
@@ -287,14 +209,13 @@
     </div>
   </div>
 
-  <!-- STATS -->
   <div class="stats">
     <div class="stat">
       <div class="stat-label">Entries (this category)</div>
       <div class="stat-value" id="statEntries">0</div>
     </div>
     <div class="stat">
-      <div class="stat-label">Total Quantity</div>
+      <div class="stat-label" id="statQtyLabel">Total Quantity</div>
       <div class="stat-value" id="statQty">0</div>
     </div>
     <div class="stat">
@@ -303,18 +224,8 @@
     </div>
   </div>
 
-  <!-- TABLE -->
   <table>
-    <thead>
-      <tr>
-        <th>Item</th>
-        <th>Qty</th>
-        <th>Reporter</th>
-        <th>Handler</th>
-        <th>Time</th>
-        <th></th>
-      </tr>
-    </thead>
+    <thead id="tableHead"></thead>
     <tbody id="tbody"></tbody>
   </table>
 
@@ -324,12 +235,74 @@
 // ===== CONFIG =====
 const STORAGE_KEY = 'mofokeng_tracker_entries';
 
-// Categories → each has a list of selectable items
+/* Each category defines:
+   - fields:     the form inputs to render
+   - columns:    the table headers + how to pull each cell value
+   - qtyField:   which field to sum for the "Total" stat (or null)
+   - qtyLabel:   label for that stat
+*/
 const CATEGORIES = {
-  'Generator':   ['Generator'],
-  'Bowser':      ['Bowser'],
-  'Locks':       ['Locks'],
-  'Load cables': ['Load cables']
+  'Generator': {
+    fields: [
+      { id: 'type',   label: 'Type',   type: 'select', options: ['Mobile', 'Static'] },
+      { id: 'status', label: 'Status', type: 'select', options: ['Operational', 'Faulty'] },
+      { id: 'reported', label: 'Reported', type: 'textarea', placeholder: 'Describe what was reported...' }
+    ],
+    columns: [
+      { label: 'Type',   render: e => pill(e.type, e.type.toLowerCase()) },
+      { label: 'Status', render: e => pill(e.status, e.status === 'Faulty' ? 'faulty' : 'operational') },
+      { label: 'Reported', render: e => escapeHtml(e.reported || '') }
+    ],
+    qtyField: null,
+    qtyLabel: 'Total'
+  },
+
+  'Bowser': {
+    fields: [
+      { id: 'item',     label: 'Item',     type: 'select', options: ['Bowser'] },
+      { id: 'qty',      label: 'Quantity', type: 'number', placeholder: '0' },
+      { id: 'reporter', label: 'Reporter', type: 'text',   placeholder: 'Who reported' },
+      { id: 'handler',  label: 'Handler',  type: 'text',   placeholder: 'Who handled' }
+    ],
+    columns: [
+      { label: 'Item',     render: e => escapeHtml(e.item) },
+      { label: 'Qty',      render: e => `<span class="qty">${e.qty}</span>` },
+      { label: 'Reporter', render: e => escapeHtml(e.reporter) },
+      { label: 'Handler',  render: e => escapeHtml(e.handler) }
+    ],
+    qtyField: 'qty',
+    qtyLabel: 'Total Quantity'
+  },
+
+  'Locks': {
+    fields: [
+      { id: 'item',     label: 'Item',     type: 'select', options: ['Locks'] },
+      { id: 'qty',      label: 'Quantity', type: 'number', placeholder: '0' },
+      { id: 'reporter', label: 'Reporter', type: 'text',   placeholder: 'Who reported' },
+      { id: 'handler',  label: 'Handler',  type: 'text',   placeholder: 'Who handled' }
+    ],
+    columns: [
+      { label: 'Item',     render: e => escapeHtml(e.item) },
+      { label: 'Qty',      render: e => `<span class="qty">${e.qty}</span>` },
+      { label: 'Reporter', render: e => escapeHtml(e.reporter) },
+      { label: 'Handler',  render: e => escapeHtml(e.handler) }
+    ],
+    qtyField: 'qty',
+    qtyLabel: 'Total Quantity'
+  },
+
+  'Load cables': {
+    fields: [
+      { id: 'qty',       label: 'Quantity',  type: 'number',   placeholder: '9', value: '9' },
+      { id: 'collected', label: 'Collected', type: 'textarea', placeholder: 'Who collected / notes...' }
+    ],
+    columns: [
+      { label: 'Qty',       render: e => `<span class="qty">${e.qty}</span>` },
+      { label: 'Collected', render: e => escapeHtml(e.collected || '') }
+    ],
+    qtyField: 'qty',
+    qtyLabel: 'Total Quantity'
+  }
 };
 
 // ===== STATE =====
@@ -350,8 +323,7 @@ function save() {
 // ===== RABBITS =====
 function spawnRabbits() {
   const container = document.getElementById('rabbits');
-  const count = 18;
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < 18; i++) {
     const r = document.createElement('div');
     r.className = 'rabbit';
     r.textContent = '🐇';
@@ -369,6 +341,7 @@ function enterApp() {
   document.getElementById('welcome').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   renderTabs();
+  renderForm();
   render();
 }
 
@@ -386,32 +359,73 @@ function renderTabs() {
 function selectCategory(cat) {
   activeCategory = cat;
   renderTabs();
-  populateItems();
+  renderForm();
   render();
 }
 
-function populateItems() {
-  const items = CATEGORIES[activeCategory] || [];
-  const sel = document.getElementById('item');
-  sel.innerHTML = items.map(i => `<option value="${i}">${i}</option>`).join('');
+// ===== FORM RENDERING =====
+function renderForm() {
+  const grid = document.getElementById('formGrid');
+  const fields = CATEGORIES[activeCategory].fields;
+
+  grid.innerHTML = fields.map(f => {
+    const id = 'f_' + f.id;
+    if (f.type === 'select') {
+      const opts = f.options.map(o => `<option value="${o}">${o}</option>`).join('');
+      return `<div><label for="${id}">${f.label}</label><select id="${id}">${opts}</select></div>`;
+    }
+    if (f.type === 'textarea') {
+      return `<div style="grid-column: 1 / -1;">
+        <label for="${id}">${f.label}</label>
+        <textarea id="${id}" placeholder="${f.placeholder || ''}"></textarea>
+      </div>`;
+    }
+    if (f.type === 'number') {
+      return `<div><label for="${id}">${f.label}</label>
+        <input id="${id}" type="number" min="0" placeholder="${f.placeholder || ''}" value="${f.value || ''}" /></div>`;
+    }
+    return `<div><label for="${id}">${f.label}</label>
+      <input id="${id}" type="text" placeholder="${f.placeholder || ''}" /></div>`;
+  }).join('');
+}
+
+function clearForm() {
+  const fields = CATEGORIES[activeCategory].fields;
+  fields.forEach(f => {
+    const el = document.getElementById('f_' + f.id);
+    if (!el) return;
+    if (f.type === 'select') el.selectedIndex = 0;
+    else if (f.value !== undefined) el.value = f.value;
+    else el.value = '';
+  });
 }
 
 // ===== ADD =====
 function addEntry() {
-  const item = document.getElementById('item').value;
-  const qty = parseInt(document.getElementById('qty').value, 10);
-  const reporter = document.getElementById('reporter').value.trim();
-  const handler = document.getElementById('handler').value.trim();
+  const fields = CATEGORIES[activeCategory].fields;
+  const data = {};
+  let error = null;
 
-  if (!item) return alert('Please select an item.');
-  if (!qty || qty < 0) return alert('Please enter a valid quantity.');
-  if (!reporter) return alert('Please enter a reporter.');
-  if (!handler) return alert('Please enter a handler.');
+  fields.forEach(f => {
+    const el = document.getElementById('f_' + f.id);
+    let val = el.value;
+
+    if (f.type === 'number') {
+      val = parseInt(val, 10);
+      if (isNaN(val) || val < 0) { error = error || `Please enter a valid ${f.label.toLowerCase()}.`; return; }
+    } else if (f.type === 'text' || f.type === 'textarea') {
+      val = val.trim();
+      if (!val) { error = error || `Please fill in ${f.label}.`; return; }
+    }
+    data[f.id] = val;
+  });
+
+  if (error) return alert(error);
 
   entries.unshift({
     id: Date.now(),
     category: activeCategory,
-    item, qty, reporter, handler,
+    ...data,
     time: new Date().toISOString()
   });
 
@@ -419,12 +433,6 @@ function addEntry() {
   renderTabs();
   render();
   clearForm();
-}
-
-function clearForm() {
-  ['qty', 'reporter', 'handler'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
 }
 
 // ===== DELETE =====
@@ -438,26 +446,38 @@ function deleteEntry(id) {
 
 // ===== RENDER =====
 function render() {
+  const cat = CATEGORIES[activeCategory];
   const filtered = entries.filter(e => e.category === activeCategory);
-  const tbody = document.getElementById('tbody');
 
+  // Table head
+  const head = document.getElementById('tableHead');
+  head.innerHTML = `<tr>
+    ${cat.columns.map(c => `<th>${c.label}</th>`).join('')}
+    <th>Time</th><th></th>
+  </tr>`;
+
+  // Table body
+  const tbody = document.getElementById('tbody');
   if (filtered.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="6" class="empty">No entries in <strong>${activeCategory}</strong> yet. Add your first update above.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="${cat.columns.length + 2}" class="empty">
+      No entries in <strong>${activeCategory}</strong> yet.
+    </td></tr>`;
   } else {
     tbody.innerHTML = filtered.map(e => `
       <tr>
-        <td>${escapeHtml(e.item)}</td>
-        <td class="qty">${e.qty}</td>
-        <td>${escapeHtml(e.reporter)}</td>
-        <td>${escapeHtml(e.handler)}</td>
+        ${cat.columns.map(c => `<td>${c.render(e)}</td>`).join('')}
         <td class="timestamp">${new Date(e.time).toLocaleString()}</td>
         <td><button class="btn-danger" onclick="deleteEntry(${e.id})">Delete</button></td>
       </tr>
     `).join('');
   }
 
+  // Stats
   document.getElementById('statEntries').textContent = filtered.length;
-  document.getElementById('statQty').textContent = filtered.reduce((s, e) => s + e.qty, 0);
+  document.getElementById('statQtyLabel').textContent = cat.qtyLabel;
+  document.getElementById('statQty').textContent = cat.qtyField
+    ? filtered.reduce((s, e) => s + (Number(e[cat.qtyField]) || 0), 0)
+    : '—';
   document.getElementById('statLast').textContent = filtered.length
     ? new Date(filtered[0].time).toLocaleString()
     : '—';
@@ -501,11 +521,14 @@ function escapeHtml(str) {
   div.textContent = str;
   return div.innerHTML;
 }
+function pill(text, cls) {
+  return `<span class="pill pill-${cls}">${escapeHtml(text)}</span>`;
+}
 
 // ===== INIT =====
 spawnRabbits();
 load();
-populateItems();
+renderForm();
 </script>
 
 </body>
