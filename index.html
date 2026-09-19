@@ -10,7 +10,7 @@
     font-family: system-ui, -apple-system, sans-serif;
     background: #0d1117;
     color: #e6edf3;
-    max-width: 950px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 2rem 1rem;
     min-height: 100vh;
@@ -20,17 +20,12 @@
 
   /* ===== FLOATING RABBITS ===== */
   #rabbits {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 0; overflow: hidden;
   }
   .rabbit {
-    position: absolute;
-    font-size: 2rem;
-    opacity: 0.15;
-    animation: float linear infinite;
+    position: absolute; font-size: 2rem;
+    opacity: 0.15; animation: float linear infinite;
     user-select: none;
   }
   @keyframes float {
@@ -47,8 +42,7 @@
     min-height: 80vh; text-align: center; gap: 1.5rem;
   }
   #welcome h1 {
-    font-size: clamp(2rem, 6vw, 3.5rem);
-    margin: 0;
+    font-size: clamp(2rem, 6vw, 3.5rem); margin: 0;
     background: linear-gradient(90deg, #58a6ff, #bc8cff, #3fb950);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -88,6 +82,33 @@
   .tab.active { background: #1f6feb; border-color: #1f6feb; color: white; }
   .tab .count { opacity: 0.7; font-size: 0.8rem; margin-left: 0.35rem; }
 
+  /* ===== BALANCE BANNER ===== */
+  .balance-banner {
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(135deg, #1f6feb22, #bc8cff22);
+    border: 1px solid #58a6ff55;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .balance-banner .label {
+    font-size: 0.8rem; color: #8b949e;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .balance-banner .value {
+    font-size: 2.5rem; font-weight: 700;
+    background: linear-gradient(90deg, #58a6ff, #bc8cff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+  .balance-banner .start {
+    font-size: 0.8rem; color: #8b949e;
+    margin-top: 0.4rem;
+  }
+
   /* ===== FORM ===== */
   .form-card {
     background: #161b22; border: 1px solid #30363d;
@@ -95,7 +116,7 @@
   }
   .form-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 0.75rem; margin-bottom: 0.75rem;
   }
   label {
@@ -112,6 +133,10 @@
   textarea { resize: vertical; min-height: 60px; }
   input:focus, select:focus, textarea:focus {
     outline: none; border-color: #58a6ff;
+  }
+  .hint {
+    font-size: 0.75rem; color: #8b949e;
+    margin-top: 0.35rem; font-style: italic;
   }
 
   .actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
@@ -131,37 +156,29 @@
   }
   .btn-danger:hover { background: #f85149; color: white; }
 
-  /* ===== STATUS PILLS ===== */
+  /* ===== PILLS ===== */
   .pill {
     display: inline-block; padding: 0.15rem 0.6rem;
     border-radius: 999px; font-size: 0.75rem; font-weight: 600;
+    white-space: nowrap;
   }
   .pill-operational { background: #23863633; color: #3fb950; border: 1px solid #3fb95055; }
   .pill-faulty      { background: #f8514933; color: #f85149; border: 1px solid #f8514955; }
   .pill-mobile      { background: #58a6ff33; color: #58a6ff; border: 1px solid #58a6ff55; }
   .pill-static      { background: #bc8cff33; color: #bc8cff; border: 1px solid #bc8cff55; }
-
-  /* ===== STATS ===== */
-  .stats { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
-  .stat {
-    background: #161b22; border: 1px solid #30363d;
-    border-radius: 8px; padding: 0.75rem 1rem;
-    flex: 1; min-width: 120px;
-  }
-  .stat-label {
-    font-size: 0.7rem; color: #8b949e;
-    text-transform: uppercase; letter-spacing: 0.5px;
-  }
-  .stat-value {
-    font-size: 1.5rem; font-weight: 600;
-    color: #58a6ff; margin-top: 0.25rem;
-  }
+  .pill-trailer     { background: #58a6ff33; color: #58a6ff; border: 1px solid #58a6ff55; }
+  .pill-bakkie      { background: #bc8cff33; color: #bc8cff; border: 1px solid #bc8cff55; }
+  .pill-stolen      { background: #f8514933; color: #f85149; border: 1px solid #f8514955; }
+  .pill-collected   { background: #23863633; color: #3fb950; border: 1px solid #3fb95055; }
+  .pill-additional  { background: #d2992233; color: #d29922; border: 1px solid #d2992255; }
 
   /* ===== TABLE ===== */
+  .table-wrap { overflow-x: auto; border-radius: 8px; }
   table {
     width: 100%; border-collapse: collapse;
     background: #161b22; border: 1px solid #30363d;
     border-radius: 8px; overflow: hidden;
+    min-width: 700px;
   }
   th, td {
     padding: 0.75rem; text-align: left;
@@ -171,12 +188,15 @@
   th {
     background: #1c2128; color: #8b949e;
     font-size: 0.75rem; text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.5px; white-space: nowrap;
   }
   tr:last-child td { border-bottom: none; }
   .qty { color: #3fb950; font-weight: 600; }
+  .qty-neg { color: #f85149; font-weight: 600; }
+  .qty-no { color: #8b949e; font-weight: 600; }
   .empty { text-align: center; color: #8b949e; padding: 2rem; }
   .timestamp { color: #8b949e; font-size: 0.8rem; white-space: nowrap; }
+  .remark-cell { max-width: 260px; white-space: pre-wrap; word-break: break-word; }
 </style>
 </head>
 <body>
@@ -199,109 +219,127 @@
 
   <div class="tabs" id="tabs"></div>
 
+  <!-- BALANCE BANNER (only for quantity categories) -->
+  <div id="balanceBanner" class="balance-banner" style="display:none;">
+    <div>
+      <div class="label">Current Balance</div>
+      <div class="value" id="balanceValue">—</div>
+      <div class="start" id="balanceStart">—</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="label">This Session</div>
+      <div style="font-size:0.9rem; margin-top:0.4rem;" id="balanceBreakdown">—</div>
+    </div>
+  </div>
+
   <div class="form-card">
     <div class="form-grid" id="formGrid"></div>
     <div class="actions">
       <button class="btn-primary" onclick="addEntry()">➕ Add Update</button>
       <button class="btn-secondary" onclick="exportData()">⬇ Export JSON</button>
       <button class="btn-secondary" onclick="document.getElementById('importFile').click()">⬆ Import JSON</button>
+      <button class="btn-secondary" onclick="resetAll()">♻ Reset All</button>
       <input id="importFile" type="file" accept=".json" style="display:none" onchange="importData(event)" />
     </div>
   </div>
 
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-label">Entries (this category)</div>
-      <div class="stat-value" id="statEntries">0</div>
-    </div>
-    <div class="stat">
-      <div class="stat-label" id="statQtyLabel">Total Quantity</div>
-      <div class="stat-value" id="statQty">0</div>
-    </div>
-    <div class="stat">
-      <div class="stat-label">Last Update</div>
-      <div class="stat-value" id="statLast" style="font-size:0.95rem;">—</div>
-    </div>
+  <div class="table-wrap">
+    <table>
+      <thead id="tableHead"></thead>
+      <tbody id="tbody"></tbody>
+    </table>
   </div>
-
-  <table>
-    <thead id="tableHead"></thead>
-    <tbody id="tbody"></tbody>
-  </table>
 
 </div>
 
 <script>
 // ===== CONFIG =====
-const STORAGE_KEY = 'mofokeng_tracker_entries';
+const STORAGE_KEY = 'mofokeng_tracker_v2';
 
-/* Each category defines:
-   - fields:     the form inputs to render
-   - columns:    the table headers + how to pull each cell value
-   - qtyField:   which field to sum for the "Total" stat (or null)
-   - qtyLabel:   label for that stat
+// Starting balances for quantity-based categories
+const STARTING_BALANCE = {
+  'Locks': 19,
+  'Load cables': 9
+};
+
+/* Effect of each type on the running balance:
+   - 'collected'  → subtracts
+   - 'additional' → adds
+   - 'stolen'     → no change (logged only)
 */
+const TYPE_EFFECT = {
+  'Collected':  'subtract',
+  'Additional': 'add',
+  'Stolen':     'none'
+};
+
 const CATEGORIES = {
   'Generator': {
+    hasBalance: false,
     fields: [
-      { id: 'type',   label: 'Type',   type: 'select', options: ['Mobile', 'Static'] },
-      { id: 'status', label: 'Status', type: 'select', options: ['Operational', 'Faulty'] },
-      { id: 'reported', label: 'Reported', type: 'textarea', placeholder: 'Describe what was reported...' }
+      { id: 'type',     label: 'Type',     type: 'select', options: ['Mobile', 'Static'] },
+      { id: 'reg',      label: 'Reg',      type: 'text',   placeholder: 'Registration / serial' },
+      { id: 'status',   label: 'Status',   type: 'select', options: ['Operational', 'Faulty'] },
+      { id: 'reported', label: 'Reported', type: 'text',   placeholder: 'Who reported' },
+      { id: 'remark',   label: 'Remark',   type: 'textarea', placeholder: 'Notes...' }
     ],
     columns: [
-      { label: 'Type',   render: e => pill(e.type, e.type.toLowerCase()) },
-      { label: 'Status', render: e => pill(e.status, e.status === 'Faulty' ? 'faulty' : 'operational') },
-      { label: 'Reported', render: e => escapeHtml(e.reported || '') }
-    ],
-    qtyField: null,
-    qtyLabel: 'Total'
+      { label: 'Type',     render: e => pill(e.type, e.type.toLowerCase()) },
+      { label: 'Reg',      render: e => escapeHtml(e.reg || '') },
+      { label: 'Status',   render: e => pill(e.status, e.status === 'Faulty' ? 'faulty' : 'operational') },
+      { label: 'Reported', render: e => escapeHtml(e.reported || '') },
+      { label: 'Remark',   render: e => `<div class="remark-cell">${escapeHtml(e.remark || '')}</div>` }
+    ]
   },
 
   'Bowser': {
+    hasBalance: false,
     fields: [
-      { id: 'item',     label: 'Item',     type: 'select', options: ['Bowser'] },
-      { id: 'qty',      label: 'Quantity', type: 'number', placeholder: '0' },
-      { id: 'reporter', label: 'Reporter', type: 'text',   placeholder: 'Who reported' },
-      { id: 'handler',  label: 'Handler',  type: 'text',   placeholder: 'Who handled' }
+      { id: 'type',     label: 'Type',     type: 'select', options: ['Trailer', 'Bakkie'] },
+      { id: 'reg',      label: 'Reg',      type: 'text',   placeholder: 'Registration' },
+      { id: 'status',   label: 'Status',   type: 'select', options: ['Operational', 'Faulty'] },
+      { id: 'reported', label: 'Reported', type: 'text',   placeholder: 'Who reported' },
+      { id: 'remark',   label: 'Remark',   type: 'textarea', placeholder: 'Notes...' }
     ],
     columns: [
-      { label: 'Item',     render: e => escapeHtml(e.item) },
-      { label: 'Qty',      render: e => `<span class="qty">${e.qty}</span>` },
-      { label: 'Reporter', render: e => escapeHtml(e.reporter) },
-      { label: 'Handler',  render: e => escapeHtml(e.handler) }
-    ],
-    qtyField: 'qty',
-    qtyLabel: 'Total Quantity'
+      { label: 'Type',     render: e => pill(e.type, e.type === 'Bakkie' ? 'bakkie' : 'trailer') },
+      { label: 'Reg',      render: e => escapeHtml(e.reg || '') },
+      { label: 'Status',   render: e => pill(e.status, e.status === 'Faulty' ? 'faulty' : 'operational') },
+      { label: 'Reported', render: e => escapeHtml(e.reported || '') },
+      { label: 'Remark',   render: e => `<div class="remark-cell">${escapeHtml(e.remark || '')}</div>` }
+    ]
   },
 
   'Locks': {
+    hasBalance: true,
     fields: [
-      { id: 'item',     label: 'Item',     type: 'select', options: ['Locks'] },
-      { id: 'qty',      label: 'Quantity', type: 'number', placeholder: '0' },
-      { id: 'reporter', label: 'Reporter', type: 'text',   placeholder: 'Who reported' },
-      { id: 'handler',  label: 'Handler',  type: 'text',   placeholder: 'Who handled' }
+      { id: 'type',    label: 'Type',     type: 'select', options: ['Stolen', 'Collected', 'Additional'] },
+      { id: 'qty',     label: 'Quantity', type: 'number', placeholder: '0' },
+      { id: 'handler', label: 'Handler',  type: 'text',   placeholder: 'Who handled' },
+      { id: 'remark',  label: 'Remark',   type: 'textarea', placeholder: 'Notes...' }
     ],
     columns: [
-      { label: 'Item',     render: e => escapeHtml(e.item) },
-      { label: 'Qty',      render: e => `<span class="qty">${e.qty}</span>` },
-      { label: 'Reporter', render: e => escapeHtml(e.reporter) },
-      { label: 'Handler',  render: e => escapeHtml(e.handler) }
-    ],
-    qtyField: 'qty',
-    qtyLabel: 'Total Quantity'
+      { label: 'Type',    render: e => pill(e.type, e.type.toLowerCase()) },
+      { label: 'Qty',     render: e => qtyCell(e) },
+      { label: 'Handler', render: e => escapeHtml(e.handler || '') },
+      { label: 'Remark',  render: e => `<div class="remark-cell">${escapeHtml(e.remark || '')}</div>` }
+    ]
   },
 
   'Load cables': {
+    hasBalance: true,
     fields: [
-      { id: 'qty',       label: 'Quantity',  type: 'number',   placeholder: '9', value: '9' },
-      { id: 'collected', label: 'Collected', type: 'textarea', placeholder: 'Who collected / notes...' }
+      { id: 'type',    label: 'Type',     type: 'select', options: ['Stolen', 'Collected', 'Additional'] },
+      { id: 'qty',     label: 'Quantity', type: 'number', placeholder: '0' },
+      { id: 'handler', label: 'Handler',  type: 'text',   placeholder: 'Who handled' },
+      { id: 'remark',  label: 'Remark',   type: 'textarea', placeholder: 'Notes...' }
     ],
     columns: [
-      { label: 'Qty',       render: e => `<span class="qty">${e.qty}</span>` },
-      { label: 'Collected', render: e => escapeHtml(e.collected || '') }
-    ],
-    qtyField: 'qty',
-    qtyLabel: 'Total Quantity'
+      { label: 'Type',    render: e => pill(e.type, e.type.toLowerCase()) },
+      { label: 'Qty',     render: e => qtyCell(e) },
+      { label: 'Handler', render: e => escapeHtml(e.handler || '') },
+      { label: 'Remark',  render: e => `<div class="remark-cell">${escapeHtml(e.remark || '')}</div>` }
+    ]
   }
 };
 
@@ -318,6 +356,27 @@ function load() {
 }
 function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+}
+
+// ===== BALANCE CALC =====
+function getBalance(category) {
+  const start = STARTING_BALANCE[category] || 0;
+  const breakdown = { collected: 0, additional: 0, stolen: 0 };
+
+  // Process in chronological order (oldest first) so the balance builds correctly
+  const sorted = [...entries]
+    .filter(e => e.category === category)
+    .sort((a, b) => new Date(a.time) - new Date(b.time));
+
+  let balance = start;
+  for (const e of sorted) {
+    const effect = TYPE_EFFECT[e.type];
+    if (effect === 'subtract') { balance -= e.qty; breakdown.collected += e.qty; }
+    else if (effect === 'add') { balance += e.qty; breakdown.additional += e.qty; }
+    else if (effect === 'none') { breakdown.stolen += e.qty; }
+  }
+
+  return { balance, start, breakdown };
 }
 
 // ===== RABBITS =====
@@ -363,10 +422,11 @@ function selectCategory(cat) {
   render();
 }
 
-// ===== FORM RENDERING =====
+// ===== FORM =====
 function renderForm() {
   const grid = document.getElementById('formGrid');
   const fields = CATEGORIES[activeCategory].fields;
+  const hasBalance = CATEGORIES[activeCategory].hasBalance;
 
   grid.innerHTML = fields.map(f => {
     const id = 'f_' + f.id;
@@ -381,8 +441,12 @@ function renderForm() {
       </div>`;
     }
     if (f.type === 'number') {
+      const hint = hasBalance
+        ? `<div class="hint">How many in THIS transaction (not the total)</div>`
+        : '';
       return `<div><label for="${id}">${f.label}</label>
-        <input id="${id}" type="number" min="0" placeholder="${f.placeholder || ''}" value="${f.value || ''}" /></div>`;
+        <input id="${id}" type="number" min="0" placeholder="${f.placeholder || ''}" />
+        ${hint}</div>`;
     }
     return `<div><label for="${id}">${f.label}</label>
       <input id="${id}" type="text" placeholder="${f.placeholder || ''}" /></div>`;
@@ -395,24 +459,24 @@ function clearForm() {
     const el = document.getElementById('f_' + f.id);
     if (!el) return;
     if (f.type === 'select') el.selectedIndex = 0;
-    else if (f.value !== undefined) el.value = f.value;
     else el.value = '';
   });
 }
 
 // ===== ADD =====
 function addEntry() {
-  const fields = CATEGORIES[activeCategory].fields;
+  const cat = CATEGORIES[activeCategory];
   const data = {};
   let error = null;
 
-  fields.forEach(f => {
+  cat.fields.forEach(f => {
     const el = document.getElementById('f_' + f.id);
     let val = el.value;
 
     if (f.type === 'number') {
       val = parseInt(val, 10);
       if (isNaN(val) || val < 0) { error = error || `Please enter a valid ${f.label.toLowerCase()}.`; return; }
+      if (val === 0) { error = error || 'Quantity must be greater than 0.'; return; }
     } else if (f.type === 'text' || f.type === 'textarea') {
       val = val.trim();
       if (!val) { error = error || `Please fill in ${f.label}.`; return; }
@@ -421,6 +485,16 @@ function addEntry() {
   });
 
   if (error) return alert(error);
+
+  // For balance categories, sanity-check Collected doesn't exceed current balance
+  if (cat.hasBalance && TYPE_EFFECT[data.type] === 'subtract') {
+    const { balance } = getBalance(activeCategory);
+    if (data.qty > balance) {
+      if (!confirm(`Only ${balance} in stock, but you're collecting ${data.qty}. Balance will go negative. Continue?`)) {
+        return;
+      }
+    }
+  }
 
   entries.unshift({
     id: Date.now(),
@@ -437,8 +511,18 @@ function addEntry() {
 
 // ===== DELETE =====
 function deleteEntry(id) {
-  if (!confirm('Delete this entry?')) return;
+  if (!confirm('Delete this entry? Balance will be recalculated.')) return;
   entries = entries.filter(e => e.id !== id);
+  save();
+  renderTabs();
+  render();
+}
+
+// ===== RESET =====
+function resetAll() {
+  if (!confirm('Erase ALL entries in ALL categories? This cannot be undone.')) return;
+  if (!confirm('Are you absolutely sure?')) return;
+  entries = [];
   save();
   renderTabs();
   render();
@@ -449,14 +533,13 @@ function render() {
   const cat = CATEGORIES[activeCategory];
   const filtered = entries.filter(e => e.category === activeCategory);
 
-  // Table head
-  const head = document.getElementById('tableHead');
-  head.innerHTML = `<tr>
+  // Head
+  document.getElementById('tableHead').innerHTML = `<tr>
     ${cat.columns.map(c => `<th>${c.label}</th>`).join('')}
     <th>Time</th><th></th>
   </tr>`;
 
-  // Table body
+  // Body
   const tbody = document.getElementById('tbody');
   if (filtered.length === 0) {
     tbody.innerHTML = `<tr><td colspan="${cat.columns.length + 2}" class="empty">
@@ -472,15 +555,29 @@ function render() {
     `).join('');
   }
 
-  // Stats
-  document.getElementById('statEntries').textContent = filtered.length;
-  document.getElementById('statQtyLabel').textContent = cat.qtyLabel;
-  document.getElementById('statQty').textContent = cat.qtyField
-    ? filtered.reduce((s, e) => s + (Number(e[cat.qtyField]) || 0), 0)
-    : '—';
-  document.getElementById('statLast').textContent = filtered.length
-    ? new Date(filtered[0].time).toLocaleString()
-    : '—';
+  // Balance banner
+  const banner = document.getElementById('balanceBanner');
+  if (cat.hasBalance) {
+    banner.style.display = 'flex';
+    const { balance, start, breakdown } = getBalance(activeCategory);
+    document.getElementById('balanceValue').textContent = balance;
+    document.getElementById('balanceStart').textContent =
+      `Started at ${start} · Collected ${breakdown.collected} · Additional ${breakdown.additional} · Stolen ${breakdown.stolen}`;
+    document.getElementById('balanceBreakdown').innerHTML =
+      `<span class="pill pill-collected">+${breakdown.additional}</span> ` +
+      `<span class="pill pill-stolen">−${breakdown.collected}</span> ` +
+      `<span class="pill pill-stolen">${breakdown.stolen} stolen</span>`;
+  } else {
+    banner.style.display = 'none';
+  }
+}
+
+// ===== QTY CELL RENDERING =====
+function qtyCell(e) {
+  const effect = TYPE_EFFECT[e.type];
+  if (effect === 'subtract') return `<span class="qty qty-neg">−${e.qty}</span>`;
+  if (effect === 'add')      return `<span class="qty">+${e.qty}</span>`;
+  return `<span class="qty qty-no">${e.qty}</span>`;
 }
 
 // ===== EXPORT / IMPORT =====
